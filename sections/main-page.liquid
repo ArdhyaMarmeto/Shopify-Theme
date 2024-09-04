@@ -1,0 +1,296 @@
+{% comment %} HTML {% endcomment %}
+{% schema %}
+{
+  "name": "Interactive Image Gallery",
+  "settings": [],
+  "presets": [{
+    "name": "Image Gallery"
+  }]
+}
+{% endschema %}
+
+<style>
+
+ .gallery-title {
+    font-family: 'Sofi';
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+.image-gallery-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     transform: translateY(0);
+     overflow:hidden;
+}
+
+.input-section, .search-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#image-url, #search-image {
+  flex-grow: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#add-image-btn {
+  padding: 10px 20px;
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  position:relative;
+  overflow:hidden;
+}
+
+.image-grid img {
+  width: 100%;
+  border-radius: 8px;
+  /* border: 2px solid #6200ea; */
+  object-fit: cover;
+  transition: transform 0.4s ease; 
+}
+  .image-grid img:hover{
+transform: scale(0.9);
+ {% comment %} transform: translateY(-30%); {% endcomment %}
+}
+/* Add to assets/theme.css or theme.scss.liquid */
+
+h1{
+font-size:20px;
+color:white;
+}
+h4{
+font-size:18px;
+color:white;
+}
+
+.container:hover .content {
+    transform: translateY(0);
+}
+
+.container img:hover {
+    /* transform: translateY(-30%); */
+}
+.container img:hover{
+  width:100%;
+  height:100%;
+  left:0;
+  cursore:pointer;
+}
+  .container:hover p{
+    opcity:1;
+    transition-delay:0.5s;
+  }
+
+.content {
+    position: absolute;
+    bottom: 0px;
+    width: 80%;
+    height: 1%;
+    background: crimson;
+    left: 10%;
+    text-align: center;
+    transition: 0.5s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h3{
+    font-size: 30px;
+    text-transform: uppercase;
+    margin: 25px;
+    color: #fff;
+}
+p{
+    width: 80%;
+    margin: 10px auto;
+    font-size: 18px;
+    transition: 0.5s;
+    opacity: 0;
+    line-height: 25px;
+    color: #fff;
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+   margin-bottom: 20px;
+}
+
+.pagination-buttons button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 0 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+
+.pagination-buttons button:hover {
+  background-color: #218838; 
+}
+
+.pagination-buttons button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination-buttons button:focus {
+  outline: none; 
+}
+
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- sections/image-gallery.liquid -->
+<div class="image-gallery-container">
+  <h1 class="gallery-title">Image Gallery</h1>
+  <div class="input-section">
+    <input type="text" id="image-url" placeholder="Enter Image URL" />
+    <button id="add-image-btn">Add Image</button>
+  </div>
+  <div class="search-section">
+    <input type="text" id="search-image" placeholder="Search images" />
+  </div>
+  <div class="pagination-buttons">
+  <button id="prev-page">Previous Page</button>
+  <button id="next-page">Next Page</button>
+</div>
+  <div id="gallery" class="image-grid">
+    <!-- Images will be dynamically inserted here -->
+    <section class="content">
+            <h3>Card Title</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </section>
+  </div>
+</div>
+
+
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+  integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+>
+
+<script>
+// Variables for pagination
+let currentPage = 1;
+const itemsPerPage = 9; // Adjust this based on your grid layout (3 columns * 3 rows = 9 items per page)
+
+function loadImages() {
+  const storedImages = JSON.parse(localStorage.getItem('galleryImages')) || [];
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Clear existing images
+  const gallery = document.getElementById('gallery');
+  gallery.innerHTML = '';
+
+  // Add images for the current page
+  storedImages.slice(startIndex, endIndex).forEach(url => {
+    addImageToGallery(url);
+  });
+
+  // Disable/Enable pagination buttons based on page limits
+  document.getElementById('prev-page').disabled = currentPage === 1;
+  document.getElementById('next-page').disabled = endIndex >= storedImages.length;
+}
+
+// Function to add image to the gallery
+function addImageToGallery(url) {
+  const gallery = document.getElementById('gallery');
+  const imgElement = document.createElement('img');
+  imgElement.src = url;
+  gallery.appendChild(imgElement);
+}
+
+// Event listener for adding images
+document.getElementById('add-image-btn').addEventListener('click', function() {
+  const imageUrl = document.getElementById('image-url').value.trim();
+
+  if (imageUrl) {
+    // Store the image in local storage
+    let storedImages = JSON.parse(localStorage.getItem('galleryImages')) || [];
+    storedImages.push(imageUrl);
+    localStorage.setItem('galleryImages', JSON.stringify(storedImages));
+
+    // Reload images to reflect the new addition
+    loadImages();
+
+    // Clear the input field
+    document.getElementById('image-url').value = '';
+  } else {
+    alert('Please enter a valid image URL.');
+  }
+});
+
+// Function to handle next page button click
+document.getElementById('next-page').addEventListener('click', function() {
+  const storedImages = JSON.parse(localStorage.getItem('galleryImages')) || [];
+  const maxPage = Math.ceil(storedImages.length / itemsPerPage);
+  
+  if (currentPage < maxPage) {
+    currentPage++;
+    loadImages();
+  }
+});
+
+// Function to handle previous page button click
+document.getElementById('prev-page').addEventListener('click', function() {
+  if (currentPage > 1) {
+    currentPage--;
+    loadImages();
+  }
+});
+
+// Event listener for search filtering
+document.getElementById('search-image').addEventListener('keyup', function() {
+  const searchTerm = this.value.toLowerCase();
+  const images = document.querySelectorAll('#gallery img');
+
+  images.forEach(function(image) {
+    const url = image.src.toLowerCase();
+
+    if (url.includes(searchTerm)) {
+      image.style.display = 'block';
+    } else {
+      image.style.display = 'none';
+    }
+  });
+});
+
+// Initial load of images
+window.onload = function() {
+  loadImages();
+};
+
+</script>
