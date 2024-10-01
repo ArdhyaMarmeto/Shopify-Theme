@@ -137,8 +137,14 @@
         {%- endif -%}
       {% endpaginate %}
     </div>
-
     <div>
+      {% for tag in customer.tags %}
+        {% if tag contains 'Developer' %}
+          <div class="badge">
+          {{ tag }}
+          </div>
+          {% endif %}
+        {% endfor %}
       <h2>{{ 'customer.account.details' | t }}</h2>
 
       {{ customer.default_address | format_address }}

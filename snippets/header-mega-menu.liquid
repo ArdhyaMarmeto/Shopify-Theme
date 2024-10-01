@@ -34,6 +34,7 @@
                   class="mega-menu__list page-width{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
                   role="list"
                 >
+
                   {%- for childlink in link.links -%}
                     <li>
                       <a
@@ -67,6 +68,11 @@
                     </li>
                   {%- endfor -%}
                 </ul>
+                {% for block in section.blocks %}
+                  {% if link.title == block.settings.nav-text %}
+                    {% render 'responsive-image', desktopImage:block.settings.nav-img %}
+                  {% endif %}
+                {% endfor %}
               </div>
             </details>
           </header-menu>

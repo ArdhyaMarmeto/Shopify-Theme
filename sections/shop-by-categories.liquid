@@ -1,0 +1,151 @@
+{{ 'shop-by-category.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'shop-by-category.js' | asset_url }}" defer></script>
+
+<div class="shop-by-category-section">
+    <!-- Heading for the section -->
+    <h2 class="shop-by-category-heading">{{ section.settings.heading }}</h2>
+
+    <!-- Dynamic Category Buttons -->
+    <div class="category-buttons">
+      {% if section.settings.show_men %}
+        <button class="category-button" data-category="men">
+          {% if section.settings.men_button != blank %}
+            {{ section.settings.men_button }}
+            {% else %}
+              Men
+          {% endif %}
+          </button>
+      {% endif %}
+      {% if section.settings.show_women %}
+        <button class="category-button" data-category="women">
+          {% if section.settings.women_button != blank %}
+            {{ section.settings.women_button }}
+            {% else %}
+              Woman
+          {% endif %}
+          </button>
+      {% endif %}
+      {% if section.settings.show_kids %}
+        <button class="category-button" data-category="kids">
+          {% if section.settings.kids_button != blank %}
+            {{ section.settings.kids_button }}
+            {% else %}
+              Kids
+          {% endif %}
+          </button>
+      {% endif %}
+    </div>
+
+    <!-- Category Images -->
+    <div class="category-images">
+      {% for block in section.blocks %}
+          <a href="{{ block.settings.link }}" class="category-item" data-category="{{ block.settings.category }}">
+             {% if block.settings.image != blank %}
+              {% render 'responsive-image', desktopImage: block.settings.image %}
+              {% else %}
+              {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+             {% endif %}
+            <div class="category-label">{{ block.settings.label }}</div>
+          </a>
+      {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop By Category",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Shop By Categories"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_men",
+      "label": "Show Men Category",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "men_button",
+      "label": "Men Button Label",
+      "default": "Men"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_women",
+      "label": "Show Women Category",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "women_button",
+      "label": "Women Button Label",
+      "default": "Women"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_kids",
+      "label": "Show Kids Category",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "kids_button",
+      "label": "Kids Button Label",
+      "default": "Kids"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Category Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Category Label",
+          "default": "Category Name"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link to Category"
+        },
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "default": "men",
+          "options": [
+            {
+              "value": "men",
+              "label": "Men"
+            },
+            {
+              "value": "women",
+              "label": "Women"
+            },
+            {
+              "value": "kids",
+              "label": "Kids"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop By Category"
+    }
+  ]
+}
+{% endschema %}

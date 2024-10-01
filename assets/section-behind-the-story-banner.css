@@ -1,0 +1,76 @@
+/* Mobile Styles (already written) */
+.banner__box {
+    padding: 3rem 2rem !important;
+  }
+  
+  .banner__media {
+    backdrop-filter: blur(2px);
+  }
+  
+  .content-container {
+    width: 343.86px !important;
+    height: 196.79px !important;
+    border-radius: 8px;
+    border: 0.6px solid #FFFFFF54;
+    opacity: 0px;
+    background: #FFFFFF1F;
+    position: absolute !important;
+    margin-bottom: 80% !important;
+    backdrop-filter: blur(5px);
+  }
+  
+  .banner__content {
+    margin-top: 50px !important;
+  }
+  
+  .banner__heading {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .banner__text p {
+    font-family: Poppins;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 14px;
+    text-align: center;
+    color: #A8A8A8;
+    padding-top: 10px;
+  }
+  
+  /* Desktop Styles */
+  @media only screen and (min-width: 768px) {
+    .banner__box {
+      padding: 3rem 2.5rem !important;
+      /* Increase padding for desktop */
+    }
+  
+    .content-container {
+      /* position: relative !important; */
+      width: 525px !important;
+      /* Larger width for desktop */
+      height: 312px !important;
+      /* Larger height for desktop */
+      border-radius: 10px;
+      /* Slightly bigger border-radius for desktop */
+      margin-bottom: 0% !important;
+      padding: 3rem 2.5rem;
+    }
+  
+    .banner__heading {
+      font-size: 24px;
+      /* Bigger font size for desktop */
+      line-height: 36px;
+      margin-top: 12px !important;
+    }
+  
+    .banner__text p {
+      font-size: 14px;
+      /* Bigger font size for desktop */
+      line-height: 24px;
+    }
+  }

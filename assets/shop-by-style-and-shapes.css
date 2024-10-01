@@ -1,0 +1,204 @@
+.shop-by-style-and-shapes {
+  width: 100%;
+  text-align: center;
+  background-color: #252e4040;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.shop-by-styles-and-shapes-inner {
+  max-width: 1280px;
+  max-height: 839.78px;
+  /* width: 1280px; */
+  width: 90%;
+  height: 839.78px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.shop-by-styles-and-shapes-inner-heading {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 48px;
+}
+
+.shop-by-styles-and-shapes-inner-image {
+ max-width: 1280px;
+ max-height: 513px;
+  /* width: 1280px; */
+  width: 100%;
+  height: 513px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.shop-by-styles-and-shapes-inner-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.shop-by-styles-and-shapes-inner-image svg {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.shop-by-style-and-shapes custom-slider {
+    max-width: 1008px;
+    width: 85%;
+}
+
+.shop-by-style-and-shapes custom-slider .splide__track {
+    max-width: 1008px;
+    max-height: 161px;
+    /* width: 1008px; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.shop-by-style-and-shapes custom-slider .style-shape-card{
+    max-width: 192px;
+    max-height: 161px;
+    width: 192px;
+    height: 161px;
+    /* margin: ; */
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+}
+
+.shop-by-style-and-shapes custom-slider .style-shape-card img {
+    width: 100%;
+    height: 113px;
+    object-fit: cover;
+}
+
+.shop-by-style-and-shapes custom-slider .style-shape-card svg {
+    width: 100%;
+    height: 113px;
+    object-fit: cover;
+}
+
+.style-shape-card-link {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+
+
+/* Card title */
+.card-title {
+    /* font-size: 24px; */
+    font-weight: 500;
+    color: #333;
+    margin-bottom: -10px;
+}
+
+
+/* Adjust Splide arrow positioning */
+.shop-by-style-and-shapes custom-slider .splide__arrow {
+    top: 35%;
+    transform: translateY(-50%);
+    z-index: 10;
+    color: red;
+    background-color: transparent;
+    border: 2px solid white;
+    width: 48px;
+    height: 48px;
+  }
+
+  .shop-by-style-and-shapes custom-slider .splide__arrow--prev {
+    left: -6%;
+  }
+
+  .shop-by-style-and-shapes custom-slider .splide__arrow--next {
+    right: -6%;
+  }
+  
+  .shop-by-style-and-shapes custom-slider .splide__arrow svg {
+    fill: white;
+  }
+
+  .shop-by-style-and-shapes custom-slider .splide__pagination {
+    margin-bottom: -30px;
+  }
+  
+  /* Base style for all pagination dots */
+  .shop-by-style-and-shapes custom-slider .splide__pagination__page {
+    width: 10px;
+    height: 10px;
+    background: #252E40;
+    margin: 0 8px;
+    border-radius: 0px;
+    cursor: pointer;
+  }
+  
+  /* Style for the active dot */
+  .shop-by-style-and-shapes custom-slider .splide__pagination__page.is-active {
+    background-color: #0f1a32;
+    width: 50px;
+    height: 3.57px;
+    border-radius: 0px;
+    position: relative;
+    bottom: 3px;
+  }
+  
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .shop-by-styles-and-shapes-inner {
+      height: auto;
+    }
+
+    .shop-by-style-and-shapes custom-slider .splide__arrow {
+      width: 35px;
+      height: 35px;
+    }
+
+    .shop-by-style-and-shapes custom-slider .splide__arrow--prev {
+      left: -10%;
+    }
+  
+    .shop-by-style-and-shapes custom-slider .splide__arrow--next {
+      right: -10%;
+    }
+}
+
+@media (max-width: 480px) {
+    .shop-by-styles-and-shapes-inner-heading {
+        width: 283px;
+        height: 36px;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 36px;
+      }
+    .shop-by-styles-and-shapes-inner-image {
+        width: 339px;
+        height: 262px;
+        object-fit: cover;
+    }
+
+    .shop-by-style-and-shapes custom-slider .style-shape-card {
+        width: 135px;
+        height: 112px;
+    }
+
+    .shop-by-style-and-shapes custom-slider {
+      width: 100vw;
+      margin-left: 10%;
+    }
+
+    .shop-by-style-and-shapes custom-slider .style-shape-card img {
+      height: 70%;
+    }
+}
+    
+  
+  

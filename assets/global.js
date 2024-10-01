@@ -1266,3 +1266,17 @@ class BulkAdd extends HTMLElement {
 if (!customElements.get('bulk-add')) {
   customElements.define('bulk-add', BulkAdd);
 }
+
+
+class SpliderComponent extends HTMLElement {
+  constructor() {
+    super();
+    this.slider = this;
+    this.options = JSON.parse(this.dataset.options)
+  }
+  connectedCallback() {
+      var splide = new Splide(this.slider, this.options);
+      splide.mount();
+  }
+}
+customElements.define('splider-component', SpliderComponent);

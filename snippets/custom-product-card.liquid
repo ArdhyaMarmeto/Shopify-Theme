@@ -1,0 +1,177 @@
+{% comment %} 
+    Accepts:
+    - product: {Object} Product Liquid object
+    - quick_add: {Object} 
+    
+    
+    Usage:
+    {% render 'custom-product-card', 
+    product: product,
+    quick_add: section.settings.quick_add,
+    show_badges: section.settings.show_badge %} 
+{% endcomment %}
+
+
+{{ 'custom-product-card.css' | asset_url | stylesheet_tag }}
+
+
+{% liquid
+  assign featured_image = product.featured_image
+  assign show_badges = true
+%}
+
+<div class="product-card">
+
+  {% comment %} {% if product.compare_at_price > product.price %}
+        <span class="custom-badge">
+          {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price | append: '% Off' }}
+        </span>
+    {% endif %} {% endcomment %}
+
+  {% for tag in product.tags %}
+    {% if tag contains 'badge--' %}
+      {% assign badgeText = tag | split: 'badge--' | last %}
+      <span class="custom-badge">{{ badgeText }}</span>
+
+    {% endif %}
+  {% endfor %}
+
+  <div class="product-card-media">
+    {% if featured_image %}
+      {% render 'responsive-image'
+        , desktopImage: featured_image
+        , mobileImage: '' %}
+    {% else %}
+      {{ 'product-3' | placeholder_svg_tag }}
+    {% endif %}
+
+    {% if quick_add == 'standard' %}
+      <div class="quick-add no-js-hidden">
+        {%- liquid
+          assign qty_rules = false
+          if product.selected_or_first_available_variant.quantity_rule.min > 1 or product.selected_or_first_available_variant.quantity_rule.max != null or product.selected_or_first_available_variant.quantity_rule.increment > 1
+            assign qty_rules = true
+          endif
+        -%}
+        {%- if product.variants.size > 0 -%}
+          <modal-opener data-modal="#QuickAdd-{{ product.id }}">
+            <button
+              id="{{ product_form_id }}-submit"
+              type="submit"
+              name="add"
+              class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add animate-arrow{% endif %}"
+              aria-haspopup="dialog"
+              aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ product.id }}"
+              data-product-url="{{ product.url }}">
+              <span>Quick look</span>
+              {%- if horizontal_quick_add -%}
+                <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+              {%- endif -%}
+              {%- render 'loading-spinner' -%}
+            </button>
+          </modal-opener>
+          <quick-add-modal id="QuickAdd-{{ product.id }}" class="quick-add-modal">
+            <div
+              role="dialog"
+              aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}"
+              aria-modal="true"
+              class="quick-add-modal__content global-settings-popup"
+              tabindex="-1">
+              <button
+                id="ModalClose-{{ product.id }}"
+                type="button"
+                class="quick-add-modal__toggle"
+                aria-label="{{ 'accessibility.close' | t }}">
+                {% render 'icon-close' %}
+              </button>
+              <div id="QuickAddInfo-{{ product.id }}" class="quick-add-modal__content-info"></div>
+            </div>
+          </quick-add-modal>
+        {%- endif -%}
+      </div>
+    {% endif %}
+
+  </div>
+
+  <div class="product-card-info">
+    <div class="product-card-info_product-title">
+      <a href={{ product.url }}>
+        <div class="info__title">
+          {{ product.title }}
+        </div>
+      </a>
+      <div class="info__rating">
+        <div class="star-container">
+          {% for i in (1..5) %}
+            {% render 'icon-star' %}
+          {% endfor %}
+        </div>
+        <span class="rating-numbers">(3k)</span>
+      </div>
+    </div>
+    <div class="info__varient">
+      {% unless product.has_only_default_variant %}
+
+        <variant-selects
+          id="variant-selects-{{ section_id }}"
+          data-section="{{ section_id }}"
+          {{ block.shopify_attributes }}>
+          {%- for option in product.options_with_values -%}
+            {% if option.name == 'color' or option.name == 'Color' %}
+              <fieldset class="js product-form__input product-form__input--pill grid">
+
+                {%- for value in option.values -%}
+                  <input
+                    type="radio"
+                    class="visually-hidden"
+                    id="{{ input_id }}"
+                    name="{{ input_name | escape }}"
+                    value="{{ value | escape }}"
+                    form="{{ product_form_id }}"
+                    {% if value.selected %}
+                    checked
+                    {% endif %}
+                    {% if option_disabled %}
+                    class="disabled"
+                    {% endif %}
+                    {{ input_dataset }}>
+                  <label
+                    for="{{ input_id }}"
+                    style=" background: {{ value }}; outline: 1px solid {{ value }}; padding: 1rem; width: 1rem; border-radius: 50%; height: 1rem; display: block;"
+                    class=" varient-color swatch--{{- value | handleize -}}">
+                    <span class="visually-hidden">{{ value }}</span>
+                    {{ label_unavailable }}
+                  </label>
+                {% endfor %}
+              </fieldset>
+            {% endif %}
+          {%- endfor -%}
+          <script type="application/json" data-selected-variant>
+                      {{ product.selected_or_first_available_variant | json }}
+          </script>
+        </variant-selects>
+      {% endunless %}
+    </div>
+    <div class="info__price">
+      <div class="price__compare">
+        {% render 'icon-compare' %}
+        <span>Compare</span>
+      </div>
+      <div class="price__checkout">
+        <div class="price-container">
+          <div class="compare-price">
+            {{ product.compare_at_price | money | replace: ' ', '' }}
+          </div>
+          <div class="product-price">{{ product.price | money | replace: ' ', '' }}</div>
+        </div>
+        <div class="add-to-cart">
+          {% render 'icon-add-to-cart' %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script data-variant-holder>
+    {{ product.variants | json }}
+  </script>
+</div>

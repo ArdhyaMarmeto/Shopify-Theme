@@ -17,6 +17,7 @@
   }
 </style>
 
+
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
   <div id="CartDrawer" class="cart-drawer">
     <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
@@ -457,6 +458,7 @@
                 {% render 'icon-caret' %}
               </span>
             </summary>
+            
             <cart-note class="cart__note field">
               <label class="visually-hidden" for="CartDrawer-Note">{{ 'sections.cart.note' | t }}</label>
               <textarea

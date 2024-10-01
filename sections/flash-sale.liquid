@@ -1,0 +1,80 @@
+{{ 'flash-sale.css' | asset_url | stylesheet_tag }}
+<div class="flash-sale-section">
+  {% render 'responsive-image',
+    desktopImage: section.settings.background_image,
+    mobileImage: section.settings.mobile_image,
+    img-class: 'w-full h-auto background-image '
+  %}
+  
+  <div class="flash-sale-wrapper ">
+    {% for block in section.blocks %}
+      <div class="flash-sale-card ">
+        {% render 'responsive-image',
+          desktopImage: block.settings.product_image,
+          mobileImage: block.settings.product_image,
+          img-class: 'w-full h-auto product-image'
+        %}
+        <div class="product-details-overlay">
+          <div class="logo-and-discount">
+            {% render 'responsive-image',
+              desktopImage: block.settings.brand_logo,
+              mobileImage: block.settings.brand_logo,
+              img_class: 'brand-logo'
+            %}
+            <span class="separator">|</span>
+            <p class="discount-text">{{ block.settings.discount_text }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Flash Sale Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image",
+      "info": "Recommended size 400px 600px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "flash_card",
+      "name": "Flash Sale Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": " Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "brand_logo",
+          "label": "Brand Logo"
+        },
+        {
+          "type": "text",
+          "id": "discount_text",
+          "label": "Discount",
+          "default": "Upto 50% Off"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Flashsale",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

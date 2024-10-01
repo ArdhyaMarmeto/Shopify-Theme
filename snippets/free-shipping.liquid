@@ -1,0 +1,102 @@
+{% comment %}
+  Uses : {% render 'free-shipping' %}
+{% endcomment %}
+<div class="shipping-bar">
+    {% liquid
+      assign free_shipping_threshold = 1000
+      assign ten_percent_discount_threshold = 2000
+      assign twenty_percent_discount_threshold = 4000
+  
+      assign cart_price = cart.total_price | divided_by: 100
+  
+      assign step = 0
+      assign remaining = 0
+  
+      if cart_price >= twenty_percent_discount_threshold
+        assign step = 3
+      elsif cart_price >= ten_percent_discount_threshold
+        assign step = 2
+        assign remaining = twenty_percent_discount_threshold | minus: cart_price
+      elsif cart_price >= free_shipping_threshold
+        assign step = 1
+        assign remaining = ten_percent_discount_threshold | minus: cart_price
+      else
+        assign remaining = free_shipping_threshold | minus: cart_price
+      endif
+    %}
+  
+    {% if step == 3 %}
+      <div class="shipping-bar__title font-bold text-md cart-drawer__black">
+        Congrats! You've unlocked a 20% discount!
+      </div>
+    {% elsif step == 2 %}
+      <div class="shipping-bar__title font-bold text-md cart-drawer__black">
+        You're 10% off! Add Rs {{ remaining | money }} for a 20% discount!
+      </div>
+    {% elsif step == 1 %}
+      <div class="shipping-bar__title font-bold text-md cart-drawer__black">
+        Free shipping unlocked! Add Rs {{ remaining | money }} for a 10% discount!
+      </div>
+    {% else %}
+      <div class="shipping-bar__title font-bold text-md cart-drawer__black">
+        Add Rs {{ remaining | money }} for free shipping!
+      </div>
+    {% endif %}
+  
+    <div class="shipping-bar__container">
+      <div class="shipping-bar__steps">
+        <div class="shipping-bar__step" style="width:calc(min(140% , 100%))">
+          <div class="shipping__icon">
+            {% if step >= 1 %}
+              <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 2.00009L6 14.0001L0.5 8.50009L1.91 7.09009L6 11.1701L16.59 0.590088L18 2.00009Z" fill="white"/>
+              </svg>
+            {% else %}
+              <span>1</span>
+            {% endif %}
+          </div>
+          <p>Free Shipping</p>
+        </div>
+  
+        <div class="shipping-bar__step" style="width: calc(min(140% , 100%))">
+          <div class="shipping__icon">
+            {% if step >= 2 %}
+              <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 2.00009L6 14.0001L0.5 8.50009L1.91 7.09009L6 11.1701L16.59 0.590088L18 2.00009Z" fill="white"/>
+              </svg>
+            {% else %}
+              <span>2</span>
+            {% endif %}
+          </div>
+          <p>10% Discount</p>
+        </div>
+  
+        <div class="shipping-bar__step" style="width: calc(min(140% , 100%))">
+          <div class="shipping__icon">
+            {% if step == 3 %}
+              <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 2.00009L6 14.0001L0.5 8.50009L1.91 7.09009L6 11.1701L16.59 0.590088L18 2.00009Z" fill="white"/>
+              </svg>
+            {% else %}
+              <span>3</span>
+            {% endif %}
+          </div>
+          <p>20% Discount</p>
+        </div>
+      </div>
+  
+      <!-- Progress Bar -->
+      <div class="shipping-bar__filled" style="width: {{ step | times: 33.33 }}%">
+        <div class="shipping__progress-indicator"></div>
+      </div>
+    </div>
+  
+    <!-- Final message when all steps are completed -->
+    {% if step == 3 %}
+      <div class="shipping-bar__message cart-drawer__black h6">
+        <p><strong>Yay!!</strong> You've unlocked a 20% discount on your order!</p>
+      </div>
+    {% endif %}
+  </div>
+  
+  

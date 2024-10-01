@@ -1,0 +1,78 @@
+{{ 'custom-featured-collection.css' | asset_url | stylesheet_tag }}
+
+
+{% capture splide_options %}
+  {
+      "perMove" : 1,
+      "arrows"  : {{ section.settings.arrows }},
+      "pagination" : {{ section.settings.pagination }}
+  }
+{% endcapture %}
+
+<section class="bestseller-section page-width">
+  <h2 class="collection__heading center">{{ section.settings.section_heading }}</h2>
+
+  <custom-splider-component
+    id="splide-{{ section.id }}"
+    class="splide bestseller-section__splide"
+    data-options='{{ splide_options }}'>
+    <div class="splide__track featured__splide-track">
+      <ul class="splide__list featured__list-container">
+        {% for product in section.settings.bestseller_collection.products limit: 10 %}
+          <li class="splide__slide list__product">
+
+            {% if product %}
+
+              {% render 'custom-product-card'
+                , product: product %}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </custom-splider-component>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "tag": "section",
+    "class": "featured-collection",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section settings"
+      },
+      {
+        "type": "text",
+        "id": "section_heading",
+        "label": "Section heading"
+      },
+      {
+        "type": "collection",
+        "id": "bestseller_collection",
+        "label": "Select a collection"
+      },
+      {
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "Enable slider arrows",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "pagination",
+        "label": "Enable pagination dots",
+        "default": true
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured collection"
+      }
+    ]
+  }
+
+{% endschema %}

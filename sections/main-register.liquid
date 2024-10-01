@@ -101,6 +101,65 @@
         {{ 'customer.register.email' | t }}
       </label>
     </div>
+    <details class="product-description-container">
+      <summary class="product-description-header">
+          <span>Select User</span>
+          {% render 'icon-caret' %}
+      </summary>
+      
+      <div class="product-description-content">
+        <div>
+          <input
+            type="radio"
+            name="customer[tags]"
+            id="RegisterForm-LastName"
+            value="Developer"
+          >
+          <label for="">Developer</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="customer[tags]"
+            id="RegisterForm-LastName"
+            value="Developer"
+          >
+        <label for="">Merchant</label>
+        </div>
+
+      </div>
+  </details>
+  
+  <style>
+  /* Styling for product description container */
+  .product-description-container {
+      border: 1px solid #000000;
+      margin-top: 2rem;
+      padding: 1rem;
+  }
+  
+  /* Summary header styling (acts like a button) */
+  .product-description-header {
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+  }
+
+  .product-description-content {
+    padding: 10px;
+    text-align: left;
+      font-size: 14px;
+      color: #333;
+  }
+  
+  details summary::-webkit-details-marker {
+      display: none;
+  }
+
+  details[open] svg{
+      transform: rotate(180deg);
+  }
+  </style>
     {%- if form.errors contains 'email' -%}
       <span id="RegisterForm-email-error" class="form__message">
         <svg aria-hidden="true" focusable="false">
@@ -172,3 +231,5 @@
   ]
 }
 {% endschema %}
+
+

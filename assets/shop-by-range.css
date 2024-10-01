@@ -1,0 +1,80 @@
+.shop-by-range-header {
+    font-family: Poppins, sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 48px;
+    color: #000000;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .slider-container {
+    width: 100%;
+    height: 378px;
+    background: linear-gradient(180deg, rgba(2, 240, 189, 0.15) 1.39%, rgba(78, 141, 247, 0.15) 9.04%, rgba(141, 87, 207, 0.15) 20.91%, rgba(204, 36, 149, 0.15) 41.79%, rgba(236, 51, 95, 0.15) 69.79%, rgba(254, 94, 50, 0.15) 87.36%, rgba(254, 183, 8, 0.15) 105.39%);
+    padding: 0 80px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  
+  .range-slide {
+    width: 194px;
+    height: 243.58px;
+    margin-bottom: 48.38px;
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .slider-container {
+    width: 100%;
+    height: 378px;
+  }
+  
+  .range-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  
+  }
+  
+  
+  
+  
+  @media (max-width: 749px) {
+    .slider-container {
+      width: 100%;
+      height: 198px;
+      box-sizing: border-box;
+      overflow: hidden;
+      position: relative;
+      padding-left: 16px;
+      padding-right: 0%;
+    }
+  
+    .range-slider {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+  
+    .range-slide {
+      width: 90px;
+      height: 113px;
+      display: flex;
+      justify-content: center;
+      margin: 8px 0;
+      margin-bottom: 24px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+  
+    .range-slide img {
+      width: 100%;
+      height: auto;
+  
+    }
+  }

@@ -253,6 +253,8 @@
         "name": "Name",
         "email": "Email",
         "phone": "Phone number",
+        "primary_phone": "Primary Phone Number",
+        "secondary_phone": "Secondary Phone Number",
         "comment": "Comment",
         "send": "Send",
         "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",

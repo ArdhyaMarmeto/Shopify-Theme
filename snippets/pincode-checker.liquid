@@ -1,0 +1,66 @@
+{% comment %} <pincode-checker data-section-id="{{ section.id }}"> {% endcomment %}
+<pincode-checker>
+    <h2>Check Delivery Availability</h2>
+    <form id="checkout-form">
+      {% comment %} <label for="pincode">Enter Pincode:</label> {% endcomment %}
+      <input type="text" id="pincode" placeholder="Enter your pincode" required>
+      <button type="submit">Check Delivery</button>
+    </form>
+    <div id="delivery-status"></div>
+  </pincode-checker>
+  
+  <style>
+      pincode-checker h2 {
+        font-family: 'Brandon Regular';
+      src: url('https://cdn.shopify.com/s/files/1/0818/0305/1309/files/Brandon_reg.otf?v=1694846599') format('opentype');
+      font-display: swap;
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+        pincode-checker {
+        /* display: block;
+        margin: 20px auto;
+        padding: 20px;
+        max-width: 400px;
+        background-color: #000;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+      }
+  
+      pincode-checker form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+  
+      pincode-checker input[type="text"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+  
+      pincode-checker button[type="submit"] {
+        padding: 10px;
+        background-color: #000;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+  
+      /* pincode-checker button[type="submit"]:hover {
+        background-color: #0056b3;
+      } */
+  
+      #delivery-status {
+        margin-top: 20px;
+        font-size: 16px;
+        color: red;
+      }
+  </style>
+
+  

@@ -1,0 +1,281 @@
+.shop-by-brands-header {
+  font-family: Poppins, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 48px;
+  color: #000000;
+  margin-bottom: 40px;
+  align-items: center;
+  text-align:center;
+}
+
+
+
+.brands-wrapper {
+display: flex;
+justify-content: flex-start;
+align-items: center;
+gap: 24px;
+overflow-x: auto;
+scroll-snap-type: x mandatory;
+scrollbar-width: none;
+}
+
+.brands-wrapper::-webkit-scrollbar {
+display: none;
+}
+
+.brand-card {
+position: relative;
+flex: 0 0 auto;
+text-align: center;
+overflow: hidden;
+scroll-snap-align: start;
+width: 301px;
+height: 360.09px;
+border-radius: 8px;
+}
+
+.collection-container {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 221.6px;
+height: 108.95px;
+background-color: white;
+border-radius: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.collection-img {
+width: 167.21px;
+height: 77.25px;
+}
+
+.collection-container img {
+width: 100%;
+height: 77.25px;
+object-fit: cover;
+}
+
+
+@media (max-width: 640px) {
+  .custom-slider {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .splide__list {
+    margin-left: -10%;
+  }
+
+  .brand-card {
+    width: 163px;
+    height: 195px;
+    border-radius: 8px;
+    overflow: hidden; 
+    position: relative; 
+  }
+
+  .brand-card img {
+    width: 100%; 
+    height: 195px; 
+  }
+
+  .collection-container {
+    width: 120px; 
+    height: 59px;
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+  }
+
+  .collection-img {
+    width: 100%; 
+    height: 59px;
+    object-fit: contain; 
+    display: block;
+    margin: 0 auto; 
+  }
+
+  .collection-container img {
+    width: 100%; 
+    height: 51.14px;
+    object-fit: cover;
+  }
+}
+/* @media screen and (min-width: 749px) {
+ 
+.brands-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.brands-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.brand-card {
+  position: relative;
+  flex: 0 0 auto;
+  text-align: center;
+  overflow: hidden;
+  scroll-snap-align: start;
+  width: 301px;
+  height: 360.09px;
+  border-radius: 8px;
+}
+
+.collection-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 221.6px;
+  height: 108.95px;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collection-img {
+  width: 167.21px;
+  height: 77.25px;
+}
+
+.collection-container img {
+  width: 100%;
+  height: 77.25px;
+  object-fit: cover;
+}}
+
+.splide__slide {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.splide__pagination {
+  display: flex !important;
+  justify-content: center;
+  position: absolute;
+  bottom: -30px;
+  z-index: 10;
+  gap: 3px;
+}
+
+.splide__pagination__page {
+  width: 10px;
+  height: 10px;
+  background: rgb(38, 45, 59);
+  margin: 0 5px;
+  border-radius: 0px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.splide__pagination__page.is-active {
+  background: rgb(38, 45, 59);
+  width: 60px;
+  height: 10px;
+  margin: 0 5px;
+  border-radius: 0px;
+  position: relative;}  
+
+
+@media (max-width: 768px) {
+  .shop-by-brands h2 {
+      font-size: 20px;
+  }
+
+  .brands-wrapper {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+  }
+
+  .brands-wrapper::-webkit-scrollbar {
+      display: none;
+  }
+
+  .brand-card {
+      position: relative;
+      flex: 0 0 auto;
+      text-align: center;
+      overflow: hidden;
+      scroll-snap-align: start;
+      width: 163px;
+      height: 195px;
+      left: 173px;
+
+      border-radius: 8px;
+      opacity: 0px;
+
+  }
+
+  .collection-container {
+      position: absolute;
+      position: relative;
+      flex: 0 0 auto;
+      text-align: center;
+      overflow: hidden;
+      scroll-snap-align: start;
+      width: 163px;
+      height: 195px;
+      left: 173px;
+
+      border-radius: 8px;
+      opacity: 0px;
+
+  }
+
+  .collection-container img {
+      width: 90.55px;
+      height: 41.83px;
+      top: 143.74px;
+      left: 193.94px;
+      gap: 0px;
+      opacity: 0px;
+
+  }
+
+
+  .collection-container {
+      bottom: 5px;
+      left: 5px;
+      width: 80px;
+  }
+
+  .splide__pagination {
+      bottom: -20px;
+  }
+
+  .splide__pagination__page {
+      width: 5px;
+      height: 5px;
+      margin: 0 2px;
+  }
+
+  .splide__pagination__page.is-active {
+      width: 30px;
+      height: 5px;
+  }
+}  */

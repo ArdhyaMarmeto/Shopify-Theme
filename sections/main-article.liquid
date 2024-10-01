@@ -234,6 +234,39 @@
                   </small>
                 {%- endif -%}
               </div>
+              <div class="field field--with-error">
+               <label>Comment</label>
+               <input
+                type="text"
+                name="comment[admin]"
+                id="CommentForm-admin"
+                autocomplete="admin"
+                class="field__input"
+                value="{{ form.admin }}"
+                autocorrect="off"
+                autocapitalize="off"
+                aria-required="true"
+                required
+                {% if form.errors contains 'admin' %}
+                  aria-invalid="true"
+                  aria-describedby="CommentForm-admin-error"
+                {% endif %}
+                placeholder="{{ 'blogs.article.admin' | t }}"
+              >
+                <label class="field__label" for="CommentForm-admin">
+                  {{- 'blogs.article.admin' | t }}
+                  <span aria-hidden="true">*</span></label
+                >
+                {%- if form.errors contains 'admin' -%}
+                  <small id="CommentForm-admin-error">
+                    <span class="form__message">
+                      {%- render 'icon-error' -%}
+                      {{- 'blogs.article.admin' | t }}
+                      {{ form.errors.messages.admin }}.</span
+                    >
+                  </small>
+                {%- endif -%}
+              </div>
             </div>
             <div class="field field--with-error">
               <textarea
